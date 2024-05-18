@@ -1,0 +1,22 @@
+service: chatGPT-demo
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+
+plugins:
+  - serverless-offline
+
+functions:
+  weatherApp:
+    handler: handler.weatherApp
+    events:
+      - httpApi:
+          method: GET
+          path: /weather
+          request:
+            parameters:
+              querystrings:
+                country: true
